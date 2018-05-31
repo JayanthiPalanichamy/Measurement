@@ -41,4 +41,17 @@ public class Measurement {
     public int hashCode() {
         return Objects.hash(unit, value);
     }
+
+    public Measurement add(Measurement length2) {
+        double addedValue = this.value + length2.value;
+        return new Measurement(Unit.inch(addedValue), addedValue);
+    }
+
+    @Override
+    public String toString() {
+        return "Measurement{" +
+                "unit=" + unit +
+                ", value=" + value +
+                '}';
+    }
 }

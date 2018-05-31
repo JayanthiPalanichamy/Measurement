@@ -47,4 +47,12 @@ public class Unit {
 
         return Objects.hash(baseUnit);
     }
+
+    @Override
+    public String toString() {
+        return "Unit{" +
+                "baseUnit=" + baseUnit +
+                ", type=" + type +
+                '}';
+    }
 }

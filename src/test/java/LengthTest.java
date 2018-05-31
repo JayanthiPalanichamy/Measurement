@@ -43,4 +43,31 @@ public class LengthTest {
 
         assertNotEquals(twelveInch,oneGallon);
     }
+
+    @Test
+    public void returnFourInchWhenTwoLengthsAreTwoInches() {
+        Measurement twoInch1 = Measurement.inch(2);
+        Measurement twoInch2 = Measurement.inch(2);
+        Measurement fourInch = Measurement.inch(4);
+
+        assertEquals(fourInch,twoInch1.add(twoInch2));
+    }
+
+    @Test
+    public void returnThreeInchWhenOneInchAndTwoInchIsAdded() {
+        Measurement oneInch = Measurement.inch(1);
+        Measurement twoInch = Measurement.inch(2);
+        Measurement threeInch = Measurement.inch(3);
+
+        assertEquals(threeInch,oneInch.add(twoInch));
+    }
+
+    @Test
+    public void returnThreeInchWhenOneInchAndTwoPointFiveCMIsAdded() {
+        Measurement oneInch = Measurement.inch(1);
+        Measurement twoPointFiveCentimeter = Measurement.centimeter(2.5);
+        Measurement threeInch = Measurement.inch(3);
+
+        assertEquals(threeInch,oneInch.add(twoPointFiveCentimeter));
+    }
 }
