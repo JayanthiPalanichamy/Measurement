@@ -6,69 +6,93 @@ import static org.junit.Assert.assertNotEquals;
 public class LengthTest {
     @Test
     public void shouldReturnTrueWhenCompareTwoEqualLengthInFeetAndInches() {
-        Measurement twelveInch = Measurement.inch(12);
-        Measurement oneFeet = Measurement.feet(1);
+        AddableMeasurement twelveInch = AddableMeasurement.inch(12);
+        AddableMeasurement oneFeet = AddableMeasurement.feet(1);
 
         assertEquals(oneFeet, twelveInch);
     }
 
     @Test
     public void shouldReturnFalseWhenCompareTwoUnEqualLengthInFeetAndInches() {
-        Measurement twelveInch = Measurement.inch(12);
-        Measurement oneFeet = Measurement.feet(2);
+        AddableMeasurement twelveInch = AddableMeasurement.inch(12);
+        AddableMeasurement oneFeet = AddableMeasurement.feet(2);
 
         assertNotEquals(oneFeet, twelveInch);
     }
 
     @Test
     public void shouldReturnTrueWhenCompareTwoEqualLengthInCentimeterAndInches() {
-        Measurement twoInch = Measurement.inch(2);
-        Measurement fiveCentimeter = Measurement.centimeter(5);
+        AddableMeasurement twoInch = AddableMeasurement.inch(2);
+        AddableMeasurement fiveCentimeter = AddableMeasurement.centimeter(5);
 
         assertEquals(fiveCentimeter, twoInch);
     }
 
     @Test
     public void returnTrueWhenTwoEqualVolumeInGallonAndLiterIsGiven() {
-        Measurement oneGallon = Measurement.gallon(1);
-        Measurement threePointSevenEightLiter = Measurement.liter(3.78);
+        AddableMeasurement oneGallon = AddableMeasurement.gallon(1);
+        AddableMeasurement threePointSevenEightLiter = AddableMeasurement.liter(3.78);
 
         assertEquals(oneGallon, threePointSevenEightLiter);
     }
 
     @Test
     public void expectExceptionWhenTwoDifferentTypesCompared() {
-        Measurement twelveInch = Measurement.inch(12);
-        Measurement oneGallon = Measurement.gallon(1);
+        AddableMeasurement twelveInch = AddableMeasurement.inch(12);
+        AddableMeasurement oneGallon = AddableMeasurement.gallon(1);
 
         assertNotEquals(twelveInch, oneGallon);
     }
 
     @Test
     public void returnFourInchWhenTwoLengthsAreTwoInches() {
-        Measurement twoInch1 = Measurement.inch(2);
-        Measurement twoInch2 = Measurement.inch(2);
-        Measurement fourInch = Measurement.inch(4);
+        AddableMeasurement twoInch1 = AddableMeasurement.inch(2);
+        AddableMeasurement twoInch2 = AddableMeasurement.inch(2);
+        AddableMeasurement fourInch = AddableMeasurement.inch(4);
 
         assertEquals(fourInch, twoInch1.add(twoInch2));
     }
 
     @Test
     public void returnThreeInchWhenOneInchAndTwoInchIsAdded() {
-        Measurement oneInch = Measurement.inch(1);
-        Measurement twoInch = Measurement.inch(2);
-        Measurement threeInch = Measurement.inch(3);
+        AddableMeasurement oneInch = AddableMeasurement.inch(1);
+        AddableMeasurement twoInch = AddableMeasurement.inch(2);
+        AddableMeasurement threeInch = AddableMeasurement.inch(3);
 
         assertEquals(threeInch, oneInch.add(twoInch));
     }
 
     @Test
     public void returnThreeInchWhenOneInchAndTwoPointFiveCMIsAdded() {
-        Measurement twoInch = Measurement.inch(2);
-        Measurement twoPointFiveCentimeter = Measurement.centimeter(2.5);
-        Measurement threeInch = Measurement.inch(3);
+        AddableMeasurement twoInch = AddableMeasurement.inch(2);
+        AddableMeasurement twoPointFiveCentimeter = AddableMeasurement.centimeter(2.5);
+        AddableMeasurement threeInch = AddableMeasurement.inch(3);
 
         assertEquals(threeInch, twoInch.add(twoPointFiveCentimeter));
     }
 
+    @Test
+    public void returnFourPointSevenEightLiterWhenOneLiterAndOneGallonIsAdded() {
+        AddableMeasurement oneLiter = AddableMeasurement.liter(1.0);
+        AddableMeasurement oneGallon = AddableMeasurement.gallon(1.0);
+        AddableMeasurement fourPointSevenEightLiter = AddableMeasurement.liter(4.779999999999999);
+
+        assertEquals(fourPointSevenEightLiter, oneLiter.add(oneGallon));
+    }
+
+    @Test(expected = MeasurementTypeIncompatible.class)
+    public void shouldThrowAnExceptionIfLengthAndVolumeIsAdded() {
+        AddableMeasurement twoInch = AddableMeasurement.inch(2);
+        AddableMeasurement oneGallon = AddableMeasurement.gallon(1.0);
+
+        twoInch.add(oneGallon);
+    }
+
+    @Test
+    public void compare100CelsiusAnd212Fahrenheit() {
+        Measurement celsius1 = Measurement.celsius(100);
+        Measurement fahrenheit = Measurement.fahrenheit(212);
+
+        assertEquals(celsius1, fahrenheit);
+    }
 }

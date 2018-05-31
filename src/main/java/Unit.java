@@ -1,14 +1,20 @@
-import java.util.Objects;
-
-
 public class Unit {
     public static final int FEET_TO_INCH = 12;
     public static final double CENTIMETER_TO_INCH = 0.4;
     public static final double GALLON_TO_LITRE = 3.78;
+    public static final double FAHRENHEIT_TO_CELSIUS = 0.5556;
     private final double conversionFactor;
     private final Type type;
+    private final double additiveConstant;
 
-    public Unit(double conversionFactor, Type type) {
+    public Unit(double additiveConstant, double conversionFactor, Type type) {
+        this.additiveConstant = additiveConstant;
+        this.conversionFactor = conversionFactor;
+        this.type = type;
+    }
+
+    public Unit( double conversionFactor, Type type) {
+        this.additiveConstant = 0;
         this.conversionFactor = conversionFactor;
         this.type = type;
     }
@@ -18,7 +24,7 @@ public class Unit {
     }
 
     public static Unit feet() {
-        return new Unit(FEET_TO_INCH, Type.LENGTH);
+        return new Unit( FEET_TO_INCH, Type.LENGTH);
     }
 
     public static Unit centimeter() {
@@ -26,27 +32,28 @@ public class Unit {
     }
 
     public static Unit gallon() {
-        return new Unit(GALLON_TO_LITRE, Type.VOLUME);
+        return new Unit( GALLON_TO_LITRE, Type.VOLUME);
     }
 
     public static Unit liter() {
         return new Unit(1, Type.VOLUME);
     }
 
+    public static Unit celsius() {
+        return new Unit(1, Type.TEMPERATURE);
+    }
+
+    public static Unit fahrenheit() {
+        return new Unit(-32,FAHRENHEIT_TO_CELSIUS, Type.TEMPERATURE);
+    }
+
     public double getInBaseUnits(double value) {
 
-            return value *conversionFactor;
-
+        return (value + additiveConstant) * conversionFactor;
     }
 
     public boolean isCompatibleWith(Unit unit) {
-        return  (unit.type == type);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(conversionFactor);
+        return (unit.type == type);
     }
 
     @Override
@@ -54,8 +61,20 @@ public class Unit {
         return "Unit{" +
                 "conversionFactor=" + conversionFactor +
                 ", type=" + type +
+                ", additiveConstant=" + additiveConstant +
                 '}';
     }
 
+    public boolean isType(Type type) {
+        return this.type == type;
+    }
 
+    public Unit giveBaseUnit() {
+        switch (type) {
+            case LENGTH: return Unit.inch();
+            case VOLUME: return Unit.liter();
+            case TEMPERATURE: return Unit.celsius();
+        }
+        return null;
+    }
 }
