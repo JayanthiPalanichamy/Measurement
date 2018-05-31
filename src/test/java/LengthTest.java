@@ -6,25 +6,41 @@ import static org.junit.Assert.assertNotEquals;
 public class LengthTest {
     @Test
     public void shouldReturnTrueWhenCompareTwoEqualLengthInFeetAndInches() {
-        Length twelveInch = Length.inch(12);
-        Length oneFeet = Length.feet(1);
+        Measurement twelveInch = Measurement.inch(12);
+        Measurement oneFeet = Measurement.feet(1);
 
         assertEquals(oneFeet,twelveInch);
     }
 
     @Test
     public void shouldReturnFalseWhenCompareTwoUnEqualLengthInFeetAndInches() {
-        Length twelveInch = Length.inch(12);
-        Length oneFeet = Length.feet(2);
+        Measurement twelveInch = Measurement.inch(12);
+        Measurement oneFeet = Measurement.feet(2);
 
         assertNotEquals(oneFeet,twelveInch);
     }
 
     @Test
     public void shouldReturnTrueWhenCompareTwoEqualLengthInCentimeterAndInches() {
-        Length twoInch = Length.inch(2);
-        Length fiveCentimeter = Length.centimeter(5);
+        Measurement twoInch = Measurement.inch(2);
+        Measurement fiveCentimeter = Measurement.centimeter(5);
 
         assertEquals(fiveCentimeter,twoInch);
+    }
+
+    @Test
+    public void returnTrueWhenTwoEqualVolumeInGallonAndLiterIsGiven() {
+        Measurement oneGallon = Measurement.gallon(1);
+        Measurement threePointSevenEightLiter = Measurement.liter(3.78);
+
+        assertEquals(oneGallon,threePointSevenEightLiter);
+    }
+
+    @Test
+    public void expectExceptionWhenTwoDifferentTypesCompared() {
+        Measurement twelveInch = Measurement.inch(12);
+        Measurement oneGallon = Measurement.gallon(1);
+
+        assertNotEquals(twelveInch,oneGallon);
     }
 }
