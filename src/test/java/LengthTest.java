@@ -9,7 +9,7 @@ public class LengthTest {
         Measurement twelveInch = Measurement.inch(12);
         Measurement oneFeet = Measurement.feet(1);
 
-        assertEquals(oneFeet,twelveInch);
+        assertEquals(oneFeet, twelveInch);
     }
 
     @Test
@@ -17,7 +17,7 @@ public class LengthTest {
         Measurement twelveInch = Measurement.inch(12);
         Measurement oneFeet = Measurement.feet(2);
 
-        assertNotEquals(oneFeet,twelveInch);
+        assertNotEquals(oneFeet, twelveInch);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class LengthTest {
         Measurement twoInch = Measurement.inch(2);
         Measurement fiveCentimeter = Measurement.centimeter(5);
 
-        assertEquals(fiveCentimeter,twoInch);
+        assertEquals(fiveCentimeter, twoInch);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class LengthTest {
         Measurement oneGallon = Measurement.gallon(1);
         Measurement threePointSevenEightLiter = Measurement.liter(3.78);
 
-        assertEquals(oneGallon,threePointSevenEightLiter);
+        assertEquals(oneGallon, threePointSevenEightLiter);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class LengthTest {
         Measurement twelveInch = Measurement.inch(12);
         Measurement oneGallon = Measurement.gallon(1);
 
-        assertNotEquals(twelveInch,oneGallon);
+        assertNotEquals(twelveInch, oneGallon);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class LengthTest {
         Measurement twoInch2 = Measurement.inch(2);
         Measurement fourInch = Measurement.inch(4);
 
-        assertEquals(fourInch,twoInch1.add(twoInch2));
+        assertEquals(fourInch, twoInch1.add(twoInch2));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class LengthTest {
         Measurement twoInch = Measurement.inch(2);
         Measurement threeInch = Measurement.inch(3);
 
-        assertEquals(threeInch,oneInch.add(twoInch));
+        assertEquals(threeInch, oneInch.add(twoInch));
     }
 
     @Test
@@ -68,6 +68,7 @@ public class LengthTest {
         Measurement twoPointFiveCentimeter = Measurement.centimeter(2.5);
         Measurement threeInch = Measurement.inch(3);
 
-        assertEquals(threeInch,twoInch.add(twoPointFiveCentimeter));
+        assertEquals(threeInch, twoInch.add(twoPointFiveCentimeter));
     }
+
 }

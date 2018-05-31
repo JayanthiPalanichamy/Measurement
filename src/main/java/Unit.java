@@ -5,58 +5,57 @@ public class Unit {
     public static final int FEET_TO_INCH = 12;
     public static final double CENTIMETER_TO_INCH = 0.4;
     public static final double GALLON_TO_LITRE = 3.78;
-    private final double baseUnit;
+    private final double conversionFactor;
     private final Type type;
 
-    public Unit(double baseUnit, Type type) {
-        this.baseUnit = baseUnit;
+    public Unit(double conversionFactor, Type type) {
+        this.conversionFactor = conversionFactor;
         this.type = type;
     }
 
-    public static Unit inch(double value) {
-        return new Unit(value,Type.LENGTH);
+    public static Unit inch() {
+        return new Unit(1, Type.LENGTH);
     }
 
-    public static Unit feet(double value) {
-        return new Unit(value * FEET_TO_INCH,Type.LENGTH );
+    public static Unit feet() {
+        return new Unit(FEET_TO_INCH, Type.LENGTH);
     }
 
-    public static Unit centimeter(double value) {
-        return new Unit(value * CENTIMETER_TO_INCH,Type.LENGTH );
+    public static Unit centimeter() {
+        return new Unit(CENTIMETER_TO_INCH, Type.LENGTH);
     }
 
-    public static Unit gallon(double value) {
-        return new Unit(value * GALLON_TO_LITRE, Type.VOLUME);
+    public static Unit gallon() {
+        return new Unit(GALLON_TO_LITRE, Type.VOLUME);
     }
 
-    public static Unit liter(double value) {
-        return new Unit(value,Type.VOLUME );
+    public static Unit liter() {
+        return new Unit(1, Type.VOLUME);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Unit unit = (Unit) o;
-        if (unit.type != type) return false;
-        return Double.compare(unit.baseUnit, baseUnit) == 0;
+    public double getInBaseUnits(double value) {
+
+            return value *conversionFactor;
+
+    }
+
+    public boolean isCompatibleWith(Unit unit) {
+        return  (unit.type == type);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(baseUnit);
+        return Objects.hash(conversionFactor);
     }
 
     @Override
     public String toString() {
         return "Unit{" +
-                "baseUnit=" + baseUnit +
+                "conversionFactor=" + conversionFactor +
                 ", type=" + type +
                 '}';
     }
 
-    public Measurement add(Unit unit) {
-        return new Measurement(Unit.inch(baseUnit+unit.baseUnit),baseUnit+unit.baseUnit);
-    }
+
 }

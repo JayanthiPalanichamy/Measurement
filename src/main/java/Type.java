@@ -1,5 +1,5 @@
 
 
 public enum Type {
-    LENGTH,VOLUME
+    LENGTH, VOLUME
 }

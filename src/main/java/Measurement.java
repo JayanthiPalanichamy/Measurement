@@ -10,31 +10,31 @@ public class Measurement {
     }
 
     public static Measurement inch(double value) {
-        return new Measurement(Unit.inch(value), value);
+        return new Measurement(Unit.inch(), value);
     }
 
     public static Measurement feet(double value) {
-        return new Measurement(Unit.feet(value), value);
+        return new Measurement(Unit.feet(), value);
     }
 
     public static Measurement centimeter(double value) {
-        return new Measurement(Unit.centimeter(value), value);
+        return new Measurement(Unit.centimeter(), value);
     }
 
     public static Measurement gallon(double value) {
-        return new Measurement(Unit.gallon(value), value);
+        return new Measurement(Unit.gallon(), value);
     }
 
     public static Measurement liter(double value) {
-        return new Measurement(Unit.liter(value), value);
+        return new Measurement(Unit.liter(), value);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Measurement length = (Measurement) o;
-        return Objects.equals(unit, length.unit);
+        Measurement that = (Measurement) o;
+        return unit.isCompatibleWith(that.unit) && Double.compare(that.unit.getInBaseUnits(that.value), unit.getInBaseUnits(value)) == 0;
     }
 
     @Override
@@ -42,9 +42,6 @@ public class Measurement {
         return Objects.hash(unit, value);
     }
 
-    public Measurement add(Measurement length2) {
-        return unit.add(length2.unit);
-    }
 
     @Override
     public String toString() {
@@ -52,5 +49,10 @@ public class Measurement {
                 "unit=" + unit +
                 ", value=" + value +
                 '}';
+    }
+
+    public Measurement add(Measurement otherLength) {
+        return new Measurement(Unit.inch(),
+                unit.getInBaseUnits(value) + otherLength.unit.getInBaseUnits(otherLength.value));
     }
 }
