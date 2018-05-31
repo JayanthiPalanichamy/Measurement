@@ -64,10 +64,10 @@ public class LengthTest {
 
     @Test
     public void returnThreeInchWhenOneInchAndTwoPointFiveCMIsAdded() {
-        Measurement oneInch = Measurement.inch(1);
+        Measurement twoInch = Measurement.inch(2);
         Measurement twoPointFiveCentimeter = Measurement.centimeter(2.5);
         Measurement threeInch = Measurement.inch(3);
 
-        assertEquals(threeInch,oneInch.add(twoPointFiveCentimeter));
+        assertEquals(threeInch,twoInch.add(twoPointFiveCentimeter));
     }
 }

@@ -43,8 +43,7 @@ public class Measurement {
     }
 
     public Measurement add(Measurement length2) {
-        double addedValue = this.value + length2.value;
-        return new Measurement(Unit.inch(addedValue), addedValue);
+        return unit.add(length2.unit);
     }
 
     @Override

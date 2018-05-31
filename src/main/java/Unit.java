@@ -55,4 +55,8 @@ public class Unit {
                 ", type=" + type +
                 '}';
     }
+
+    public Measurement add(Unit unit) {
+        return new Measurement(Unit.inch(baseUnit+unit.baseUnit),baseUnit+unit.baseUnit);
+    }
 }
