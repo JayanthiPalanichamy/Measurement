@@ -9,14 +9,12 @@ public class Measurement {
         this.value = value;
     }
 
-
-
     public static Measurement celsius(double value) {
-        return new Measurement(Unit.celsius(),value);
+        return new Measurement(Unit.celsius(), value);
     }
 
     public static Measurement fahrenheit(double value) {
-        return new Measurement(Unit.fahrenheit(),value);
+        return new Measurement(Unit.fahrenheit(), value);
     }
 
     @Override
@@ -32,7 +30,6 @@ public class Measurement {
         return Objects.hash(unit, value);
     }
 
-
     @Override
     public String toString() {
         return "Measurement{" +
@@ -42,7 +39,7 @@ public class Measurement {
     }
 
     public boolean compare(double a, double b) {
-        double EPSILON=0.01;
-        return Math.abs(a-b) < EPSILON;
+        double EPSILON = 0.01;
+        return Math.abs(a - b) < EPSILON;
     }
 }

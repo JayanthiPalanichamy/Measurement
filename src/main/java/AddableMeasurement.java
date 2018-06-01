@@ -1,11 +1,6 @@
-
-
 public class AddableMeasurement extends Measurement {
-
-
     public AddableMeasurement(Unit unit, double value) {
        super(unit, value);
-
     }
 
     public static AddableMeasurement inch(double value) {
